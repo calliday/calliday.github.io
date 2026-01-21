@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Home, Film, Vote, Ticket, User, Calendar, MapPin, Clock, Star, Users, Plus, Check } from 'lucide-react';
-
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 const MavenCinemasApp = () => {
   const [currentScreen, setCurrentScreen] = useState('home');
   const [selectedFilm, setSelectedFilm] = useState(null);
@@ -10,32 +10,93 @@ const MavenCinemasApp = () => {
   const [isGuest, setIsGuest] = useState(true);
 
   // Sample data
-  const nowShowing = [
-    { id: 1, title: 'Casablanca', year: 1942, rating: 'PG', runtime: '102 min', image: '🎬', votes: 234 },
-    { id: 2, title: 'The Godfather', year: 1972, rating: 'R', runtime: '175 min', image: '🎬', votes: 189 },
-    { id: 3, title: 'Singin\' in the Rain', year: 1952, rating: 'G', runtime: '103 min', image: '🎬', votes: 156 }
-  ];
-
-  const votingPhases = [
-    { id: 'current', name: 'March 2026 Lineup', endDate: 'Feb 28, 2026', status: 'active' },
-    { id: 'future1', name: 'April 2026 Lineup', startDate: 'Mar 1, 2026', status: 'upcoming' }
-  ];
-
-  const votingFilms = [
-    { id: 4, title: 'Rear Window', year: 1954, votes: 142, userVoted: false },
-    { id: 5, title: 'North by Northwest', year: 1959, votes: 128, userVoted: false },
-    { id: 6, title: 'Roman Holiday', year: 1953, votes: 98, userVoted: false },
-    { id: 7, title: 'Some Like It Hot', year: 1959, votes: 87, userVoted: false },
-    { id: 8, title: 'Sunset Boulevard', year: 1950, votes: 76, userVoted: false }
-  ];
-
-  const upcomingEvents = [
-    { id: 1, title: 'Film Noir Night: Double Feature', type: 'Special Event', date: 'Feb 14', image: '🎭' },
-    { id: 2, title: 'The Godfather', type: 'Film', date: 'Feb 15-21', image: '🎬' },
-    { id: 3, title: 'Director Q&A: Classic Westerns', type: 'Special Event', date: 'Feb 22', image: '🎤' }
-  ];
-
-  const toggleVote = (filmId) => {
+  const nowShowing = [{
+    id: 1,
+    title: 'Casablanca',
+    year: 1942,
+    rating: 'PG',
+    runtime: '102 min',
+    image: '🎬',
+    votes: 234
+  }, {
+    id: 2,
+    title: 'The Godfather',
+    year: 1972,
+    rating: 'R',
+    runtime: '175 min',
+    image: '🎬',
+    votes: 189
+  }, {
+    id: 3,
+    title: 'Singin\' in the Rain',
+    year: 1952,
+    rating: 'G',
+    runtime: '103 min',
+    image: '🎬',
+    votes: 156
+  }];
+  const votingPhases = [{
+    id: 'current',
+    name: 'March 2026 Lineup',
+    endDate: 'Feb 28, 2026',
+    status: 'active'
+  }, {
+    id: 'future1',
+    name: 'April 2026 Lineup',
+    startDate: 'Mar 1, 2026',
+    status: 'upcoming'
+  }];
+  const votingFilms = [{
+    id: 4,
+    title: 'Rear Window',
+    year: 1954,
+    votes: 142,
+    userVoted: false
+  }, {
+    id: 5,
+    title: 'North by Northwest',
+    year: 1959,
+    votes: 128,
+    userVoted: false
+  }, {
+    id: 6,
+    title: 'Roman Holiday',
+    year: 1953,
+    votes: 98,
+    userVoted: false
+  }, {
+    id: 7,
+    title: 'Some Like It Hot',
+    year: 1959,
+    votes: 87,
+    userVoted: false
+  }, {
+    id: 8,
+    title: 'Sunset Boulevard',
+    year: 1950,
+    votes: 76,
+    userVoted: false
+  }];
+  const upcomingEvents = [{
+    id: 1,
+    title: 'Film Noir Night: Double Feature',
+    type: 'Special Event',
+    date: 'Feb 14',
+    image: '🎭'
+  }, {
+    id: 2,
+    title: 'The Godfather',
+    type: 'Film',
+    date: 'Feb 15-21',
+    image: '🎬'
+  }, {
+    id: 3,
+    title: 'Director Q&A: Classic Westerns',
+    type: 'Special Event',
+    date: 'Feb 22',
+    image: '🎤'
+  }];
+  const toggleVote = filmId => {
     if (votes.includes(filmId)) {
       setVotes(votes.filter(id => id !== filmId));
     } else if (votes.length < 4) {
@@ -44,498 +105,681 @@ const MavenCinemasApp = () => {
   };
 
   // Header component
-  const Header = ({ title, showBack = false, onBack }) => (
-    <div className="bg-purple-800 text-white p-4 flex items-center justify-between">
-      {showBack ? (
-        <button onClick={onBack} className="p-1">
-          <ChevronLeft size={24} />
-        </button>
-      ) : (
-        <div className="w-8" />
-      )}
-      <h1 className="text-lg font-bold flex-1 text-center">{title}</h1>
-      <div className="w-8" />
-    </div>
-  );
+  const Header = ({
+    title,
+    showBack = false,
+    onBack
+  }) => /*#__PURE__*/_jsxs("div", {
+    className: "bg-purple-800 text-white p-4 flex items-center justify-between",
+    children: [showBack ? /*#__PURE__*/_jsx("button", {
+      onClick: onBack,
+      className: "p-1",
+      children: /*#__PURE__*/_jsx(ChevronLeft, {
+        size: 24
+      })
+    }) : /*#__PURE__*/_jsx("div", {
+      className: "w-8"
+    }), /*#__PURE__*/_jsx("h1", {
+      className: "text-lg font-bold flex-1 text-center",
+      children: title
+    }), /*#__PURE__*/_jsx("div", {
+      className: "w-8"
+    })]
+  });
 
   // Bottom Navigation
-  const BottomNav = () => (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-16">
-      <button onClick={() => setCurrentScreen('home')} className={`flex flex-col items-center justify-center flex-1 ${currentScreen === 'home' ? 'text-purple-800' : 'text-gray-500'}`}>
-        <Home size={24} />
-        <span className="text-xs mt-1">Home</span>
-      </button>
-      <button onClick={() => setCurrentScreen('vote')} className={`flex flex-col items-center justify-center flex-1 ${currentScreen === 'vote' ? 'text-purple-800' : 'text-gray-500'}`}>
-        <Vote size={24} />
-        <span className="text-xs mt-1">Vote</span>
-      </button>
-      <button onClick={() => setCurrentScreen('events')} className={`flex flex-col items-center justify-center flex-1 ${currentScreen === 'events' ? 'text-purple-800' : 'text-gray-500'}`}>
-        <Calendar size={24} />
-        <span className="text-xs mt-1">Events</span>
-      </button>
-      <button onClick={() => setCurrentScreen('tickets')} className={`flex flex-col items-center justify-center flex-1 ${currentScreen === 'tickets' ? 'text-purple-800' : 'text-gray-500'}`}>
-        <Ticket size={24} />
-        <span className="text-xs mt-1">Tickets</span>
-      </button>
-      <button onClick={() => setCurrentScreen('profile')} className={`flex flex-col items-center justify-center flex-1 ${currentScreen === 'profile' ? 'text-purple-800' : 'text-gray-500'}`}>
-        <User size={24} />
-        <span className="text-xs mt-1">Profile</span>
-      </button>
-    </div>
-  );
+  const BottomNav = () => /*#__PURE__*/_jsxs("div", {
+    className: "fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-16",
+    children: [/*#__PURE__*/_jsxs("button", {
+      onClick: () => setCurrentScreen('home'),
+      className: `flex flex-col items-center justify-center flex-1 ${currentScreen === 'home' ? 'text-purple-800' : 'text-gray-500'}`,
+      children: [/*#__PURE__*/_jsx(Home, {
+        size: 24
+      }), /*#__PURE__*/_jsx("span", {
+        className: "text-xs mt-1",
+        children: "Home"
+      })]
+    }), /*#__PURE__*/_jsxs("button", {
+      onClick: () => setCurrentScreen('vote'),
+      className: `flex flex-col items-center justify-center flex-1 ${currentScreen === 'vote' ? 'text-purple-800' : 'text-gray-500'}`,
+      children: [/*#__PURE__*/_jsx(Vote, {
+        size: 24
+      }), /*#__PURE__*/_jsx("span", {
+        className: "text-xs mt-1",
+        children: "Vote"
+      })]
+    }), /*#__PURE__*/_jsxs("button", {
+      onClick: () => setCurrentScreen('events'),
+      className: `flex flex-col items-center justify-center flex-1 ${currentScreen === 'events' ? 'text-purple-800' : 'text-gray-500'}`,
+      children: [/*#__PURE__*/_jsx(Calendar, {
+        size: 24
+      }), /*#__PURE__*/_jsx("span", {
+        className: "text-xs mt-1",
+        children: "Events"
+      })]
+    }), /*#__PURE__*/_jsxs("button", {
+      onClick: () => setCurrentScreen('tickets'),
+      className: `flex flex-col items-center justify-center flex-1 ${currentScreen === 'tickets' ? 'text-purple-800' : 'text-gray-500'}`,
+      children: [/*#__PURE__*/_jsx(Ticket, {
+        size: 24
+      }), /*#__PURE__*/_jsx("span", {
+        className: "text-xs mt-1",
+        children: "Tickets"
+      })]
+    }), /*#__PURE__*/_jsxs("button", {
+      onClick: () => setCurrentScreen('profile'),
+      className: `flex flex-col items-center justify-center flex-1 ${currentScreen === 'profile' ? 'text-purple-800' : 'text-gray-500'}`,
+      children: [/*#__PURE__*/_jsx(User, {
+        size: 24
+      }), /*#__PURE__*/_jsx("span", {
+        className: "text-xs mt-1",
+        children: "Profile"
+      })]
+    })]
+  });
 
   // Home Screen
-  const HomeScreen = () => (
-    <div className="pb-16">
-      <Header title="Maven Cinemas" />
-      
-      <div className="bg-purple-800 text-white p-6">
-        <h2 className="text-2xl font-bold mb-2">Utah's Premiere</h2>
-        <h3 className="text-xl mb-4">Retro/Revival Cinema</h3>
-        <p className="text-sm text-purple-200">Nostalgic films, new memories</p>
-      </div>
-
-      <div className="p-4">
-        <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 mb-4">
-          <h3 className="font-bold text-purple-900 mb-1">🗳️ Voting Open!</h3>
-          <p className="text-sm text-gray-700">Help pick March's lineup - ends Feb 28</p>
-          <button onClick={() => setCurrentScreen('vote')} className="mt-2 text-purple-800 font-semibold text-sm">
-            Vote Now →
-          </button>
-        </div>
-
-        <h3 className="text-lg font-bold text-purple-900 mb-3">Now Showing</h3>
-        {nowShowing.map(film => (
-          <div 
-            key={film.id} 
-            onClick={() => { setSelectedFilm(film); setCurrentScreen('filmDetail'); }}
-            className="bg-white border border-gray-200 rounded-lg p-4 mb-3 flex items-start cursor-pointer hover:shadow-md"
-          >
-            <div className="text-4xl mr-4">{film.image}</div>
-            <div className="flex-1">
-              <h4 className="font-bold text-purple-900">{film.title}</h4>
-              <p className="text-sm text-gray-600">{film.year} • {film.rating} • {film.runtime}</p>
-              <div className="flex items-center mt-2 text-sm text-gray-500">
-                <Users size={14} className="mr-1" />
-                <span>{film.votes} community votes</span>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        <button 
-          onClick={() => setCurrentScreen('events')}
-          className="w-full bg-purple-800 text-white py-3 rounded-lg font-semibold mt-4"
-        >
-          View All Events
-        </button>
-      </div>
-    </div>
-  );
+  const HomeScreen = () => /*#__PURE__*/_jsxs("div", {
+    className: "pb-16",
+    children: [/*#__PURE__*/_jsx(Header, {
+      title: "Maven Cinemas"
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "bg-purple-800 text-white p-6",
+      children: [/*#__PURE__*/_jsx("h2", {
+        className: "text-2xl font-bold mb-2",
+        children: "Utah's Premiere"
+      }), /*#__PURE__*/_jsx("h3", {
+        className: "text-xl mb-4",
+        children: "Retro/Revival Cinema"
+      }), /*#__PURE__*/_jsx("p", {
+        className: "text-sm text-purple-200",
+        children: "Nostalgic films, new memories"
+      })]
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "p-4",
+      children: [/*#__PURE__*/_jsxs("div", {
+        className: "bg-yellow-50 border-l-4 border-yellow-600 p-4 mb-4",
+        children: [/*#__PURE__*/_jsx("h3", {
+          className: "font-bold text-purple-900 mb-1",
+          children: "\uD83D\uDDF3\uFE0F Voting Open!"
+        }), /*#__PURE__*/_jsx("p", {
+          className: "text-sm text-gray-700",
+          children: "Help pick March's lineup - ends Feb 28"
+        }), /*#__PURE__*/_jsx("button", {
+          onClick: () => setCurrentScreen('vote'),
+          className: "mt-2 text-purple-800 font-semibold text-sm",
+          children: "Vote Now \u2192"
+        })]
+      }), /*#__PURE__*/_jsx("h3", {
+        className: "text-lg font-bold text-purple-900 mb-3",
+        children: "Now Showing"
+      }), nowShowing.map(film => /*#__PURE__*/_jsxs("div", {
+        onClick: () => {
+          setSelectedFilm(film);
+          setCurrentScreen('filmDetail');
+        },
+        className: "bg-white border border-gray-200 rounded-lg p-4 mb-3 flex items-start cursor-pointer hover:shadow-md",
+        children: [/*#__PURE__*/_jsx("div", {
+          className: "text-4xl mr-4",
+          children: film.image
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "flex-1",
+          children: [/*#__PURE__*/_jsx("h4", {
+            className: "font-bold text-purple-900",
+            children: film.title
+          }), /*#__PURE__*/_jsxs("p", {
+            className: "text-sm text-gray-600",
+            children: [film.year, " \u2022 ", film.rating, " \u2022 ", film.runtime]
+          }), /*#__PURE__*/_jsxs("div", {
+            className: "flex items-center mt-2 text-sm text-gray-500",
+            children: [/*#__PURE__*/_jsx(Users, {
+              size: 14,
+              className: "mr-1"
+            }), /*#__PURE__*/_jsxs("span", {
+              children: [film.votes, " community votes"]
+            })]
+          })]
+        })]
+      }, film.id)), /*#__PURE__*/_jsx("button", {
+        onClick: () => setCurrentScreen('events'),
+        className: "w-full bg-purple-800 text-white py-3 rounded-lg font-semibold mt-4",
+        children: "View All Events"
+      })]
+    })]
+  });
 
   // Voting Screen
-  const VoteScreen = () => (
-    <div className="pb-16">
-      <Header title="Vote for Films" />
-      
-      <div className="bg-purple-50 p-4 border-b border-purple-200">
-        <div className="flex justify-between items-center mb-2">
-          <h3 className="font-bold text-purple-900">March 2026 Lineup</h3>
-          <span className="text-sm text-purple-700">Ends Feb 28</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-gray-700">Select up to 4 films</p>
-          <span className="bg-purple-800 text-white px-3 py-1 rounded-full text-sm font-semibold">
-            {votes.length}/4 votes
-          </span>
-        </div>
-      </div>
-
-      <div className="p-4">
-        {votingFilms.map(film => {
-          const hasVoted = votes.includes(film.id);
-          return (
-            <div 
-              key={film.id}
-              onClick={() => toggleVote(film.id)}
-              className={`border rounded-lg p-4 mb-3 cursor-pointer ${
-                hasVoted ? 'bg-purple-50 border-purple-800' : 'bg-white border-gray-200'
-              }`}
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <h4 className="font-bold text-purple-900">{film.title}</h4>
-                  <p className="text-sm text-gray-600">{film.year}</p>
-                  <div className="flex items-center mt-2 text-sm text-gray-500">
-                    <Users size={14} className="mr-1" />
-                    <span>{film.votes + (hasVoted ? 1 : 0)} votes</span>
-                  </div>
-                </div>
-                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                  hasVoted ? 'bg-purple-800 border-purple-800' : 'border-gray-300'
-                }`}>
-                  {hasVoted && <Check size={16} className="text-white" />}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-
-        <button className="w-full border-2 border-dashed border-purple-400 text-purple-800 py-4 rounded-lg font-semibold mt-2 flex items-center justify-center">
-          <Plus size={20} className="mr-2" />
-          Suggest a Film
-        </button>
-
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <h4 className="font-semibold text-gray-900 mb-2">Upcoming Phases</h4>
-          <div className="text-sm text-gray-600">
-            <p>• April 2026 Lineup - Voting starts Mar 1</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const VoteScreen = () => /*#__PURE__*/_jsxs("div", {
+    className: "pb-16",
+    children: [/*#__PURE__*/_jsx(Header, {
+      title: "Vote for Films"
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "bg-purple-50 p-4 border-b border-purple-200",
+      children: [/*#__PURE__*/_jsxs("div", {
+        className: "flex justify-between items-center mb-2",
+        children: [/*#__PURE__*/_jsx("h3", {
+          className: "font-bold text-purple-900",
+          children: "March 2026 Lineup"
+        }), /*#__PURE__*/_jsx("span", {
+          className: "text-sm text-purple-700",
+          children: "Ends Feb 28"
+        })]
+      }), /*#__PURE__*/_jsxs("div", {
+        className: "flex items-center justify-between",
+        children: [/*#__PURE__*/_jsx("p", {
+          className: "text-sm text-gray-700",
+          children: "Select up to 4 films"
+        }), /*#__PURE__*/_jsxs("span", {
+          className: "bg-purple-800 text-white px-3 py-1 rounded-full text-sm font-semibold",
+          children: [votes.length, "/4 votes"]
+        })]
+      })]
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "p-4",
+      children: [votingFilms.map(film => {
+        const hasVoted = votes.includes(film.id);
+        return /*#__PURE__*/_jsx("div", {
+          onClick: () => toggleVote(film.id),
+          className: `border rounded-lg p-4 mb-3 cursor-pointer ${hasVoted ? 'bg-purple-50 border-purple-800' : 'bg-white border-gray-200'}`,
+          children: /*#__PURE__*/_jsxs("div", {
+            className: "flex items-start justify-between",
+            children: [/*#__PURE__*/_jsxs("div", {
+              className: "flex-1",
+              children: [/*#__PURE__*/_jsx("h4", {
+                className: "font-bold text-purple-900",
+                children: film.title
+              }), /*#__PURE__*/_jsx("p", {
+                className: "text-sm text-gray-600",
+                children: film.year
+              }), /*#__PURE__*/_jsxs("div", {
+                className: "flex items-center mt-2 text-sm text-gray-500",
+                children: [/*#__PURE__*/_jsx(Users, {
+                  size: 14,
+                  className: "mr-1"
+                }), /*#__PURE__*/_jsxs("span", {
+                  children: [film.votes + (hasVoted ? 1 : 0), " votes"]
+                })]
+              })]
+            }), /*#__PURE__*/_jsx("div", {
+              className: `w-6 h-6 rounded-full border-2 flex items-center justify-center ${hasVoted ? 'bg-purple-800 border-purple-800' : 'border-gray-300'}`,
+              children: hasVoted && /*#__PURE__*/_jsx(Check, {
+                size: 16,
+                className: "text-white"
+              })
+            })]
+          })
+        }, film.id);
+      }), /*#__PURE__*/_jsxs("button", {
+        className: "w-full border-2 border-dashed border-purple-400 text-purple-800 py-4 rounded-lg font-semibold mt-2 flex items-center justify-center",
+        children: [/*#__PURE__*/_jsx(Plus, {
+          size: 20,
+          className: "mr-2"
+        }), "Suggest a Film"]
+      }), /*#__PURE__*/_jsxs("div", {
+        className: "mt-6 p-4 bg-gray-50 rounded-lg",
+        children: [/*#__PURE__*/_jsx("h4", {
+          className: "font-semibold text-gray-900 mb-2",
+          children: "Upcoming Phases"
+        }), /*#__PURE__*/_jsx("div", {
+          className: "text-sm text-gray-600",
+          children: /*#__PURE__*/_jsx("p", {
+            children: "\u2022 April 2026 Lineup - Voting starts Mar 1"
+          })
+        })]
+      })]
+    })]
+  });
 
   // Events Screen
-  const EventsScreen = () => (
-    <div className="pb-16">
-      <Header title="Upcoming Events" />
-      
-      <div className="p-4">
-        <div className="mb-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Location</label>
-          <select className="w-full border border-gray-300 rounded-lg p-3 bg-white">
-            <option>Provo, UT (Main Location)</option>
-          </select>
-        </div>
-
-        <h3 className="text-lg font-bold text-purple-900 mb-3">Next 3 Months</h3>
-        {upcomingEvents.map(event => (
-          <div 
-            key={event.id}
-            onClick={() => { setSelectedEvent(event); setCurrentScreen('eventDetail'); }}
-            className="bg-white border border-gray-200 rounded-lg p-4 mb-3 flex items-start cursor-pointer hover:shadow-md"
-          >
-            <div className="text-4xl mr-4">{event.image}</div>
-            <div className="flex-1">
-              <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-semibold">
-                {event.type}
-              </span>
-              <h4 className="font-bold text-purple-900 mt-2">{event.title}</h4>
-              <div className="flex items-center mt-2 text-sm text-gray-600">
-                <Calendar size={14} className="mr-1" />
-                <span>{event.date}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  const EventsScreen = () => /*#__PURE__*/_jsxs("div", {
+    className: "pb-16",
+    children: [/*#__PURE__*/_jsx(Header, {
+      title: "Upcoming Events"
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "p-4",
+      children: [/*#__PURE__*/_jsxs("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/_jsx("label", {
+          className: "block text-sm font-semibold text-gray-700 mb-2",
+          children: "Location"
+        }), /*#__PURE__*/_jsx("select", {
+          className: "w-full border border-gray-300 rounded-lg p-3 bg-white",
+          children: /*#__PURE__*/_jsx("option", {
+            children: "Provo, UT (Main Location)"
+          })
+        })]
+      }), /*#__PURE__*/_jsx("h3", {
+        className: "text-lg font-bold text-purple-900 mb-3",
+        children: "Next 3 Months"
+      }), upcomingEvents.map(event => /*#__PURE__*/_jsxs("div", {
+        onClick: () => {
+          setSelectedEvent(event);
+          setCurrentScreen('eventDetail');
+        },
+        className: "bg-white border border-gray-200 rounded-lg p-4 mb-3 flex items-start cursor-pointer hover:shadow-md",
+        children: [/*#__PURE__*/_jsx("div", {
+          className: "text-4xl mr-4",
+          children: event.image
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "flex-1",
+          children: [/*#__PURE__*/_jsx("span", {
+            className: "text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-semibold",
+            children: event.type
+          }), /*#__PURE__*/_jsx("h4", {
+            className: "font-bold text-purple-900 mt-2",
+            children: event.title
+          }), /*#__PURE__*/_jsxs("div", {
+            className: "flex items-center mt-2 text-sm text-gray-600",
+            children: [/*#__PURE__*/_jsx(Calendar, {
+              size: 14,
+              className: "mr-1"
+            }), /*#__PURE__*/_jsx("span", {
+              children: event.date
+            })]
+          })]
+        })]
+      }, event.id))]
+    })]
+  });
 
   // Film Detail Screen
   const FilmDetailScreen = () => {
     if (!selectedFilm) return null;
-    
-    return (
-      <div className="pb-16">
-        <Header 
-          title={selectedFilm.title} 
-          showBack 
-          onBack={() => setCurrentScreen('home')} 
-        />
-        
-        <div className="p-4">
-          <div className="text-center mb-6">
-            <div className="text-8xl mb-4">🎬</div>
-            <h2 className="text-2xl font-bold text-purple-900 mb-2">{selectedFilm.title}</h2>
-            <p className="text-gray-600">{selectedFilm.year} • {selectedFilm.rating} • {selectedFilm.runtime}</p>
-          </div>
-
-          <div className="bg-purple-50 rounded-lg p-4 mb-4">
-            <h3 className="font-bold text-purple-900 mb-2">Synopsis</h3>
-            <p className="text-sm text-gray-700">
-              A timeless classic that has captivated audiences for generations. Experience the magic on the big screen as it was meant to be seen.
-            </p>
-          </div>
-
-          <div className="bg-yellow-50 rounded-lg p-4 mb-4">
-            <h3 className="font-bold text-purple-900 mb-2">✨ Fun Facts</h3>
-            <ul className="text-sm text-gray-700 space-y-1">
-              <li>• This film won multiple Academy Awards</li>
-              <li>• Shot entirely on location</li>
-              <li>• Features one of cinema's most iconic scenes</li>
-            </ul>
-          </div>
-
-          <div className="mb-4">
-            <h3 className="font-bold text-purple-900 mb-2">Cast & Crew</h3>
-            <p className="text-sm text-gray-700">Director: Classic Director</p>
-            <p className="text-sm text-gray-700">Starring: Legendary Actor, Iconic Star</p>
-          </div>
-
-          <div className="mb-4">
-            <a href="#" className="text-purple-800 text-sm font-semibold">
-              Watch Trailer on YouTube →
-            </a>
-          </div>
-
-          <div className="border-t pt-4">
-            <h3 className="font-bold text-purple-900 mb-3">Showtimes This Week</h3>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg">
-                <div>
-                  <p className="font-semibold text-gray-900">Friday, Feb 15</p>
-                  <p className="text-sm text-gray-600">7:00 PM, 9:30 PM</p>
-                </div>
-                <button 
-                  onClick={() => setCurrentScreen('checkout')}
-                  className="bg-purple-800 text-white px-4 py-2 rounded-lg text-sm font-semibold"
-                >
-                  Buy
-                </button>
-              </div>
-              <div className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg">
-                <div>
-                  <p className="font-semibold text-gray-900">Saturday, Feb 16</p>
-                  <p className="text-sm text-gray-600">2:00 PM, 7:00 PM, 9:30 PM</p>
-                </div>
-                <button 
-                  onClick={() => setCurrentScreen('checkout')}
-                  className="bg-purple-800 text-white px-4 py-2 rounded-lg text-sm font-semibold"
-                >
-                  Buy
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/_jsxs("div", {
+      className: "pb-16",
+      children: [/*#__PURE__*/_jsx(Header, {
+        title: selectedFilm.title,
+        showBack: true,
+        onBack: () => setCurrentScreen('home')
+      }), /*#__PURE__*/_jsxs("div", {
+        className: "p-4",
+        children: [/*#__PURE__*/_jsxs("div", {
+          className: "text-center mb-6",
+          children: [/*#__PURE__*/_jsx("div", {
+            className: "text-8xl mb-4",
+            children: "\uD83C\uDFAC"
+          }), /*#__PURE__*/_jsx("h2", {
+            className: "text-2xl font-bold text-purple-900 mb-2",
+            children: selectedFilm.title
+          }), /*#__PURE__*/_jsxs("p", {
+            className: "text-gray-600",
+            children: [selectedFilm.year, " \u2022 ", selectedFilm.rating, " \u2022 ", selectedFilm.runtime]
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "bg-purple-50 rounded-lg p-4 mb-4",
+          children: [/*#__PURE__*/_jsx("h3", {
+            className: "font-bold text-purple-900 mb-2",
+            children: "Synopsis"
+          }), /*#__PURE__*/_jsx("p", {
+            className: "text-sm text-gray-700",
+            children: "A timeless classic that has captivated audiences for generations. Experience the magic on the big screen as it was meant to be seen."
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "bg-yellow-50 rounded-lg p-4 mb-4",
+          children: [/*#__PURE__*/_jsx("h3", {
+            className: "font-bold text-purple-900 mb-2",
+            children: "\u2728 Fun Facts"
+          }), /*#__PURE__*/_jsxs("ul", {
+            className: "text-sm text-gray-700 space-y-1",
+            children: [/*#__PURE__*/_jsx("li", {
+              children: "\u2022 This film won multiple Academy Awards"
+            }), /*#__PURE__*/_jsx("li", {
+              children: "\u2022 Shot entirely on location"
+            }), /*#__PURE__*/_jsx("li", {
+              children: "\u2022 Features one of cinema's most iconic scenes"
+            })]
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "mb-4",
+          children: [/*#__PURE__*/_jsx("h3", {
+            className: "font-bold text-purple-900 mb-2",
+            children: "Cast & Crew"
+          }), /*#__PURE__*/_jsx("p", {
+            className: "text-sm text-gray-700",
+            children: "Director: Classic Director"
+          }), /*#__PURE__*/_jsx("p", {
+            className: "text-sm text-gray-700",
+            children: "Starring: Legendary Actor, Iconic Star"
+          })]
+        }), /*#__PURE__*/_jsx("div", {
+          className: "mb-4",
+          children: /*#__PURE__*/_jsx("a", {
+            href: "#",
+            className: "text-purple-800 text-sm font-semibold",
+            children: "Watch Trailer on YouTube \u2192"
+          })
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "border-t pt-4",
+          children: [/*#__PURE__*/_jsx("h3", {
+            className: "font-bold text-purple-900 mb-3",
+            children: "Showtimes This Week"
+          }), /*#__PURE__*/_jsxs("div", {
+            className: "space-y-2",
+            children: [/*#__PURE__*/_jsxs("div", {
+              className: "flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg",
+              children: [/*#__PURE__*/_jsxs("div", {
+                children: [/*#__PURE__*/_jsx("p", {
+                  className: "font-semibold text-gray-900",
+                  children: "Friday, Feb 15"
+                }), /*#__PURE__*/_jsx("p", {
+                  className: "text-sm text-gray-600",
+                  children: "7:00 PM, 9:30 PM"
+                })]
+              }), /*#__PURE__*/_jsx("button", {
+                onClick: () => setCurrentScreen('checkout'),
+                className: "bg-purple-800 text-white px-4 py-2 rounded-lg text-sm font-semibold",
+                children: "Buy"
+              })]
+            }), /*#__PURE__*/_jsxs("div", {
+              className: "flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg",
+              children: [/*#__PURE__*/_jsxs("div", {
+                children: [/*#__PURE__*/_jsx("p", {
+                  className: "font-semibold text-gray-900",
+                  children: "Saturday, Feb 16"
+                }), /*#__PURE__*/_jsx("p", {
+                  className: "text-sm text-gray-600",
+                  children: "2:00 PM, 7:00 PM, 9:30 PM"
+                })]
+              }), /*#__PURE__*/_jsx("button", {
+                onClick: () => setCurrentScreen('checkout'),
+                className: "bg-purple-800 text-white px-4 py-2 rounded-lg text-sm font-semibold",
+                children: "Buy"
+              })]
+            })]
+          })]
+        })]
+      })]
+    });
   };
 
   // Event Detail Screen
   const EventDetailScreen = () => {
     if (!selectedEvent) return null;
-    
-    return (
-      <div className="pb-16">
-        <Header 
-          title="Event Details" 
-          showBack 
-          onBack={() => setCurrentScreen('events')} 
-        />
-        
-        <div className="p-4">
-          <div className="text-center mb-6">
-            <div className="text-8xl mb-4">{selectedEvent.image}</div>
-            <span className="inline-block text-xs bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-semibold mb-3">
-              {selectedEvent.type}
-            </span>
-            <h2 className="text-2xl font-bold text-purple-900 mb-2">{selectedEvent.title}</h2>
-            <div className="flex items-center justify-center text-gray-600">
-              <Calendar size={16} className="mr-2" />
-              <span>{selectedEvent.date}</span>
-            </div>
-          </div>
-
-          <div className="bg-purple-50 rounded-lg p-4 mb-4">
-            <h3 className="font-bold text-purple-900 mb-2">About This Event</h3>
-            <p className="text-sm text-gray-700">
-              Join us for a special evening celebrating classic cinema. This unique event brings together film enthusiasts for an unforgettable experience.
-            </p>
-          </div>
-
-          <div className="border-t pt-4">
-            <h3 className="font-bold text-purple-900 mb-3">Event Times</h3>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg">
-                <div>
-                  <p className="font-semibold text-gray-900">Thursday, Feb 14</p>
-                  <p className="text-sm text-gray-600">7:00 PM</p>
-                </div>
-                <button 
-                  onClick={() => setCurrentScreen('checkout')}
-                  className="bg-purple-800 text-white px-4 py-2 rounded-lg text-sm font-semibold"
-                >
-                  Buy
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/_jsxs("div", {
+      className: "pb-16",
+      children: [/*#__PURE__*/_jsx(Header, {
+        title: "Event Details",
+        showBack: true,
+        onBack: () => setCurrentScreen('events')
+      }), /*#__PURE__*/_jsxs("div", {
+        className: "p-4",
+        children: [/*#__PURE__*/_jsxs("div", {
+          className: "text-center mb-6",
+          children: [/*#__PURE__*/_jsx("div", {
+            className: "text-8xl mb-4",
+            children: selectedEvent.image
+          }), /*#__PURE__*/_jsx("span", {
+            className: "inline-block text-xs bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-semibold mb-3",
+            children: selectedEvent.type
+          }), /*#__PURE__*/_jsx("h2", {
+            className: "text-2xl font-bold text-purple-900 mb-2",
+            children: selectedEvent.title
+          }), /*#__PURE__*/_jsxs("div", {
+            className: "flex items-center justify-center text-gray-600",
+            children: [/*#__PURE__*/_jsx(Calendar, {
+              size: 16,
+              className: "mr-2"
+            }), /*#__PURE__*/_jsx("span", {
+              children: selectedEvent.date
+            })]
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "bg-purple-50 rounded-lg p-4 mb-4",
+          children: [/*#__PURE__*/_jsx("h3", {
+            className: "font-bold text-purple-900 mb-2",
+            children: "About This Event"
+          }), /*#__PURE__*/_jsx("p", {
+            className: "text-sm text-gray-700",
+            children: "Join us for a special evening celebrating classic cinema. This unique event brings together film enthusiasts for an unforgettable experience."
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "border-t pt-4",
+          children: [/*#__PURE__*/_jsx("h3", {
+            className: "font-bold text-purple-900 mb-3",
+            children: "Event Times"
+          }), /*#__PURE__*/_jsx("div", {
+            className: "space-y-2",
+            children: /*#__PURE__*/_jsxs("div", {
+              className: "flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg",
+              children: [/*#__PURE__*/_jsxs("div", {
+                children: [/*#__PURE__*/_jsx("p", {
+                  className: "font-semibold text-gray-900",
+                  children: "Thursday, Feb 14"
+                }), /*#__PURE__*/_jsx("p", {
+                  className: "text-sm text-gray-600",
+                  children: "7:00 PM"
+                })]
+              }), /*#__PURE__*/_jsx("button", {
+                onClick: () => setCurrentScreen('checkout'),
+                className: "bg-purple-800 text-white px-4 py-2 rounded-lg text-sm font-semibold",
+                children: "Buy"
+              })]
+            })
+          })]
+        })]
+      })]
+    });
   };
 
   // Checkout Screen
-  const CheckoutScreen = () => (
-    <div className="pb-16">
-      <Header 
-        title="Checkout" 
-        showBack 
-        onBack={() => setCurrentScreen('filmDetail')} 
-      />
-      
-      <div className="p-4">
-        <div className="bg-purple-50 rounded-lg p-4 mb-4">
-          <h3 className="font-bold text-purple-900 mb-2">Casablanca</h3>
-          <p className="text-sm text-gray-700">Friday, Feb 15 • 7:00 PM</p>
-        </div>
-
-        {isGuest && (
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
-            <p className="text-sm text-gray-800 mb-2">Save on tickets with a membership!</p>
-            <button 
-              onClick={() => setIsGuest(false)}
-              className="text-purple-800 font-semibold text-sm"
-            >
-              Sign In →
-            </button>
-          </div>
-        )}
-
-        <div className="mb-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Tickets</label>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg">
-              <span className="text-sm">Adult {!isGuest && '(Member)'}</span>
-              <div className="flex items-center">
-                <button className="w-8 h-8 bg-gray-200 rounded-full">-</button>
-                <span className="mx-3 font-semibold">1</span>
-                <button className="w-8 h-8 bg-purple-800 text-white rounded-full">+</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Promo Code</label>
-          <input 
-            type="text" 
-            placeholder="Enter code"
-            className="w-full border border-gray-300 rounded-lg p-3"
-          />
-        </div>
-
-        <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
-          <div className="flex justify-between mb-2">
-            <span className="text-sm text-gray-700">Subtotal</span>
-            <span className="font-semibold">${isGuest ? '12.00' : '10.00'}</span>
-          </div>
-          <div className="flex justify-between mb-2">
-            <span className="text-sm text-gray-700">Fees</span>
-            <span className="font-semibold">$1.50</span>
-          </div>
-          <div className="border-t pt-2 mt-2 flex justify-between">
-            <span className="font-bold text-purple-900">Total</span>
-            <span className="font-bold text-purple-900">${isGuest ? '13.50' : '11.50'}</span>
-          </div>
-        </div>
-
-        <button 
-          onClick={() => setCurrentScreen('tickets')}
-          className="w-full bg-purple-800 text-white py-4 rounded-lg font-bold"
-        >
-          Complete Purchase
-        </button>
-      </div>
-    </div>
-  );
+  const CheckoutScreen = () => /*#__PURE__*/_jsxs("div", {
+    className: "pb-16",
+    children: [/*#__PURE__*/_jsx(Header, {
+      title: "Checkout",
+      showBack: true,
+      onBack: () => setCurrentScreen('filmDetail')
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "p-4",
+      children: [/*#__PURE__*/_jsxs("div", {
+        className: "bg-purple-50 rounded-lg p-4 mb-4",
+        children: [/*#__PURE__*/_jsx("h3", {
+          className: "font-bold text-purple-900 mb-2",
+          children: "Casablanca"
+        }), /*#__PURE__*/_jsx("p", {
+          className: "text-sm text-gray-700",
+          children: "Friday, Feb 15 \u2022 7:00 PM"
+        })]
+      }), isGuest && /*#__PURE__*/_jsxs("div", {
+        className: "bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4",
+        children: [/*#__PURE__*/_jsx("p", {
+          className: "text-sm text-gray-800 mb-2",
+          children: "Save on tickets with a membership!"
+        }), /*#__PURE__*/_jsx("button", {
+          onClick: () => setIsGuest(false),
+          className: "text-purple-800 font-semibold text-sm",
+          children: "Sign In \u2192"
+        })]
+      }), /*#__PURE__*/_jsxs("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/_jsx("label", {
+          className: "block text-sm font-semibold text-gray-700 mb-2",
+          children: "Tickets"
+        }), /*#__PURE__*/_jsx("div", {
+          className: "space-y-2",
+          children: /*#__PURE__*/_jsxs("div", {
+            className: "flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg",
+            children: [/*#__PURE__*/_jsxs("span", {
+              className: "text-sm",
+              children: ["Adult ", !isGuest && '(Member)']
+            }), /*#__PURE__*/_jsxs("div", {
+              className: "flex items-center",
+              children: [/*#__PURE__*/_jsx("button", {
+                className: "w-8 h-8 bg-gray-200 rounded-full",
+                children: "-"
+              }), /*#__PURE__*/_jsx("span", {
+                className: "mx-3 font-semibold",
+                children: "1"
+              }), /*#__PURE__*/_jsx("button", {
+                className: "w-8 h-8 bg-purple-800 text-white rounded-full",
+                children: "+"
+              })]
+            })]
+          })
+        })]
+      }), /*#__PURE__*/_jsxs("div", {
+        className: "mb-4",
+        children: [/*#__PURE__*/_jsx("label", {
+          className: "block text-sm font-semibold text-gray-700 mb-2",
+          children: "Promo Code"
+        }), /*#__PURE__*/_jsx("input", {
+          type: "text",
+          placeholder: "Enter code",
+          className: "w-full border border-gray-300 rounded-lg p-3"
+        })]
+      }), /*#__PURE__*/_jsxs("div", {
+        className: "bg-white border border-gray-200 rounded-lg p-4 mb-4",
+        children: [/*#__PURE__*/_jsxs("div", {
+          className: "flex justify-between mb-2",
+          children: [/*#__PURE__*/_jsx("span", {
+            className: "text-sm text-gray-700",
+            children: "Subtotal"
+          }), /*#__PURE__*/_jsxs("span", {
+            className: "font-semibold",
+            children: ["$", isGuest ? '12.00' : '10.00']
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "flex justify-between mb-2",
+          children: [/*#__PURE__*/_jsx("span", {
+            className: "text-sm text-gray-700",
+            children: "Fees"
+          }), /*#__PURE__*/_jsx("span", {
+            className: "font-semibold",
+            children: "$1.50"
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "border-t pt-2 mt-2 flex justify-between",
+          children: [/*#__PURE__*/_jsx("span", {
+            className: "font-bold text-purple-900",
+            children: "Total"
+          }), /*#__PURE__*/_jsxs("span", {
+            className: "font-bold text-purple-900",
+            children: ["$", isGuest ? '13.50' : '11.50']
+          })]
+        })]
+      }), /*#__PURE__*/_jsx("button", {
+        onClick: () => setCurrentScreen('tickets'),
+        className: "w-full bg-purple-800 text-white py-4 rounded-lg font-bold",
+        children: "Complete Purchase"
+      })]
+    })]
+  });
 
   // Tickets Screen
-  const TicketsScreen = () => (
-    <div className="pb-16">
-      <Header title="My Tickets" />
-      
-      <div className="p-4">
-        <div className="bg-white border-2 border-purple-800 rounded-lg p-6 mb-4">
-          <div className="text-center mb-4">
-            <h3 className="font-bold text-purple-900 text-lg">Casablanca</h3>
-            <p className="text-sm text-gray-600">Friday, Feb 15, 2026 • 7:00 PM</p>
-          </div>
-          
-          <div className="bg-gray-100 p-4 rounded-lg mb-4 text-center">
-            <div className="text-6xl mb-2">▄▄▄▄▄▄▄▄▄▄</div>
-            <p className="text-xs text-gray-600">QR Code</p>
-          </div>
-          
-          <div className="text-sm text-gray-700 space-y-1">
-            <p><span className="font-semibold">Ticket:</span> #12345</p>
-            <p><span className="font-semibold">Adult:</span> 1</p>
-            <p><span className="font-semibold">Location:</span> Provo, UT</p>
-          </div>
-        </div>
-
-        <div className="text-center text-sm text-gray-500">
-          <p>Show this QR code at the entrance</p>
-        </div>
-      </div>
-    </div>
-  );
+  const TicketsScreen = () => /*#__PURE__*/_jsxs("div", {
+    className: "pb-16",
+    children: [/*#__PURE__*/_jsx(Header, {
+      title: "My Tickets"
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "p-4",
+      children: [/*#__PURE__*/_jsxs("div", {
+        className: "bg-white border-2 border-purple-800 rounded-lg p-6 mb-4",
+        children: [/*#__PURE__*/_jsxs("div", {
+          className: "text-center mb-4",
+          children: [/*#__PURE__*/_jsx("h3", {
+            className: "font-bold text-purple-900 text-lg",
+            children: "Casablanca"
+          }), /*#__PURE__*/_jsx("p", {
+            className: "text-sm text-gray-600",
+            children: "Friday, Feb 15, 2026 \u2022 7:00 PM"
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "bg-gray-100 p-4 rounded-lg mb-4 text-center",
+          children: [/*#__PURE__*/_jsx("div", {
+            className: "text-6xl mb-2",
+            children: "\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584"
+          }), /*#__PURE__*/_jsx("p", {
+            className: "text-xs text-gray-600",
+            children: "QR Code"
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "text-sm text-gray-700 space-y-1",
+          children: [/*#__PURE__*/_jsxs("p", {
+            children: [/*#__PURE__*/_jsx("span", {
+              className: "font-semibold",
+              children: "Ticket:"
+            }), " #12345"]
+          }), /*#__PURE__*/_jsxs("p", {
+            children: [/*#__PURE__*/_jsx("span", {
+              className: "font-semibold",
+              children: "Adult:"
+            }), " 1"]
+          }), /*#__PURE__*/_jsxs("p", {
+            children: [/*#__PURE__*/_jsx("span", {
+              className: "font-semibold",
+              children: "Location:"
+            }), " Provo, UT"]
+          })]
+        })]
+      }), /*#__PURE__*/_jsx("div", {
+        className: "text-center text-sm text-gray-500",
+        children: /*#__PURE__*/_jsx("p", {
+          children: "Show this QR code at the entrance"
+        })
+      })]
+    })]
+  });
 
   // Profile Screen
-  const ProfileScreen = () => (
-    <div className="pb-16">
-      <Header title="Profile" />
-      
-      <div className="p-4">
-        {isGuest ? (
-          <div className="text-center py-8">
-            <User size={48} className="mx-auto text-gray-400 mb-4" />
-            <h3 className="font-bold text-purple-900 mb-2">Welcome to Maven Cinemas</h3>
-            <p className="text-sm text-gray-600 mb-6">Sign in to access member benefits</p>
-            <button 
-              onClick={() => setIsGuest(false)}
-              className="bg-purple-800 text-white px-8 py-3 rounded-lg font-semibold"
-            >
-              Sign In
-            </button>
-            <button className="mt-3 text-purple-800 font-semibold text-sm block w-full">
-              Create Account
-            </button>
-          </div>
-        ) : (
-          <div>
-            <div className="bg-purple-50 rounded-lg p-4 mb-4 text-center">
-              <User size={48} className="mx-auto text-purple-800 mb-2" />
-              <h3 className="font-bold text-purple-900">John Doe</h3>
-              <p className="text-sm text-gray-600">Member since 2024</p>
-            </div>
-
-            <div className="space-y-3">
-              <button className="w-full text-left p-4 bg-white border border-gray-200 rounded-lg">
-                Order History
-              </button>
-              <button className="w-full text-left p-4 bg-white border border-gray-200 rounded-lg">
-                Membership Details
-              </button>
-              <button className="w-full text-left p-4 bg-white border border-gray-200 rounded-lg">
-                Notification Settings
-              </button>
-              <button className="w-full text-left p-4 bg-white border border-gray-200 rounded-lg">
-                Location Preferences
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="max-w-md mx-auto bg-gray-50 min-h-screen relative">
-      {currentScreen === 'home' && <HomeScreen />}
-      {currentScreen === 'vote' && <VoteScreen />}
-      {currentScreen === 'events' && <EventsScreen />}
-      {currentScreen === 'filmDetail' && <FilmDetailScreen />}
-      {currentScreen === 'eventDetail' && <EventDetailScreen />}
-      {currentScreen === 'checkout' && <CheckoutScreen />}
-      {currentScreen === 'tickets' && <TicketsScreen />}
-      {currentScreen === 'profile' && <ProfileScreen />}
-      <BottomNav />
-    </div>
-  );
+  const ProfileScreen = () => /*#__PURE__*/_jsxs("div", {
+    className: "pb-16",
+    children: [/*#__PURE__*/_jsx(Header, {
+      title: "Profile"
+    }), /*#__PURE__*/_jsx("div", {
+      className: "p-4",
+      children: isGuest ? /*#__PURE__*/_jsxs("div", {
+        className: "text-center py-8",
+        children: [/*#__PURE__*/_jsx(User, {
+          size: 48,
+          className: "mx-auto text-gray-400 mb-4"
+        }), /*#__PURE__*/_jsx("h3", {
+          className: "font-bold text-purple-900 mb-2",
+          children: "Welcome to Maven Cinemas"
+        }), /*#__PURE__*/_jsx("p", {
+          className: "text-sm text-gray-600 mb-6",
+          children: "Sign in to access member benefits"
+        }), /*#__PURE__*/_jsx("button", {
+          onClick: () => setIsGuest(false),
+          className: "bg-purple-800 text-white px-8 py-3 rounded-lg font-semibold",
+          children: "Sign In"
+        }), /*#__PURE__*/_jsx("button", {
+          className: "mt-3 text-purple-800 font-semibold text-sm block w-full",
+          children: "Create Account"
+        })]
+      }) : /*#__PURE__*/_jsxs("div", {
+        children: [/*#__PURE__*/_jsxs("div", {
+          className: "bg-purple-50 rounded-lg p-4 mb-4 text-center",
+          children: [/*#__PURE__*/_jsx(User, {
+            size: 48,
+            className: "mx-auto text-purple-800 mb-2"
+          }), /*#__PURE__*/_jsx("h3", {
+            className: "font-bold text-purple-900",
+            children: "John Doe"
+          }), /*#__PURE__*/_jsx("p", {
+            className: "text-sm text-gray-600",
+            children: "Member since 2024"
+          })]
+        }), /*#__PURE__*/_jsxs("div", {
+          className: "space-y-3",
+          children: [/*#__PURE__*/_jsx("button", {
+            className: "w-full text-left p-4 bg-white border border-gray-200 rounded-lg",
+            children: "Order History"
+          }), /*#__PURE__*/_jsx("button", {
+            className: "w-full text-left p-4 bg-white border border-gray-200 rounded-lg",
+            children: "Membership Details"
+          }), /*#__PURE__*/_jsx("button", {
+            className: "w-full text-left p-4 bg-white border border-gray-200 rounded-lg",
+            children: "Notification Settings"
+          }), /*#__PURE__*/_jsx("button", {
+            className: "w-full text-left p-4 bg-white border border-gray-200 rounded-lg",
+            children: "Location Preferences"
+          })]
+        })]
+      })
+    })]
+  });
+  return /*#__PURE__*/_jsxs("div", {
+    className: "max-w-md mx-auto bg-gray-50 min-h-screen relative",
+    children: [currentScreen === 'home' && /*#__PURE__*/_jsx(HomeScreen, {}), currentScreen === 'vote' && /*#__PURE__*/_jsx(VoteScreen, {}), currentScreen === 'events' && /*#__PURE__*/_jsx(EventsScreen, {}), currentScreen === 'filmDetail' && /*#__PURE__*/_jsx(FilmDetailScreen, {}), currentScreen === 'eventDetail' && /*#__PURE__*/_jsx(EventDetailScreen, {}), currentScreen === 'checkout' && /*#__PURE__*/_jsx(CheckoutScreen, {}), currentScreen === 'tickets' && /*#__PURE__*/_jsx(TicketsScreen, {}), currentScreen === 'profile' && /*#__PURE__*/_jsx(ProfileScreen, {}), /*#__PURE__*/_jsx(BottomNav, {})]
+  });
 };
-
 export default MavenCinemasApp;
