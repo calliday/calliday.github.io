@@ -2,12 +2,15 @@
 """Check Megaplex Theatres showtimes for open luxury seats over the next few days.
 
 Talks directly to Megaplex's public JSON API (apiv2.megaplex.com), which powers
-megaplex.com. No API key or auth is required. See README.md in this directory
-for how the endpoints were discovered and what they return.
+megaplex.com. No API key or auth is required. See README.md for how the
+endpoints were discovered and what they return.
+
+By default, checks The Odyssey at Sandy at Jordan Commons.
 
 Example:
-    python3 check_luxury_seating.py --days 5
-    python3 check_luxury_seating.py --days 3 --film "Super Troopers"
+    python3 check_luxury_seating.py
+    python3 check_luxury_seating.py --days 3 --film "The Odyssey"
+    python3 check_luxury_seating.py --film "" --days 5   # check every now-playing film instead
 """
 
 import argparse
@@ -20,6 +23,7 @@ from datetime import date, timedelta
 
 API_BASE = "https://apiv2.megaplex.com"
 DEFAULT_CINEMA = "Sandy at Jordan Commons"
+DEFAULT_FILM = "The Odyssey"
 USER_AGENT = "Mozilla/5.0 (compatible; luxury-seat-checker/1.0)"
 # Matches Jordan Commons' "Luxury" (heated recliner auditorium) and
 # "Lux Box" (private box seating) session/area attributes.
@@ -102,7 +106,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--days", type=int, default=5, help="How many days ahead to check (default: 5)")
     parser.add_argument("--cinema", default=DEFAULT_CINEMA, help=f"Cinema name (default: {DEFAULT_CINEMA!r})")
-    parser.add_argument("--film", default=None, help="Only check films whose title contains this text")
+    parser.add_argument(
+        "--film",
+        default=DEFAULT_FILM,
+        help=f"Only check films whose title contains this text (default: {DEFAULT_FILM!r}; pass '' for all films)",
+    )
     parser.add_argument("--delay", type=float, default=0.3, help="Seconds to sleep between API calls (default: 0.3)")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON instead of a table")
     parser.add_argument("--list-cinemas", action="store_true", help="List known cinema names and exit")
