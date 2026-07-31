@@ -62,16 +62,15 @@ python3 check_luxury_seating.py --film "Super Troopers 3"
 python3 check_luxury_seating.py --list-cinemas
 python3 check_luxury_seating.py --cinema "Salt Lake City at The Gateway" --film "Super Troopers 3"
 
-# Check every now-playing film instead of just one
-python3 check_luxury_seating.py --film "" --days 5
-
 # Machine-readable output (for wiring into another tool/notifier)
 python3 check_luxury_seating.py --json
 ```
 
-The script prints any showtime in the window with at least one open luxury
-seat, along with how many are open out of the section's total.
+`--film` always checks exactly one movie: it errors out if the title doesn't
+match any now-playing film, or if it matches more than one (e.g. a movie with
+a "fan event" variant) — narrow the substring in that case.
 
-Checking every now-playing film over several days means dozens of API calls;
-a `--delay` flag (default `0.3`s between requests) keeps it polite to
-Megaplex's API. The default single-film filter keeps a run fast.
+The script prints any showtime in the window with at least one open luxury
+seat, along with how many are open out of the section's total. A `--delay`
+flag (default `0.3`s between requests) keeps repeated requests polite to
+Megaplex's API.

@@ -5,12 +5,12 @@ Talks directly to Megaplex's public JSON API (apiv2.megaplex.com), which powers
 megaplex.com. No API key or auth is required. See README.md for how the
 endpoints were discovered and what they return.
 
-By default, checks The Odyssey at Sandy at Jordan Commons.
+Checks a single movie at a time. By default, checks The Odyssey at Sandy at
+Jordan Commons.
 
 Example:
     python3 check_luxury_seating.py
     python3 check_luxury_seating.py --days 3 --film "The Odyssey"
-    python3 check_luxury_seating.py --film "" --days 5   # check every now-playing film instead
 """
 
 import argparse
@@ -59,12 +59,16 @@ def find_cinema_id(name):
     raise SystemExit(f"Cinema {name!r} not found. Run with --list-cinemas to see valid names.")
 
 
-def now_playing_for_cinema(cinema_id, film_filter=None):
+def find_film(cinema_id, film_filter):
     films = _request("/api/film/now-playing")
     films = [f for f in films if f["cinemaId"] == cinema_id]
-    if film_filter:
-        films = [f for f in films if film_filter.lower() in f["title"].lower()]
-    return films
+    matches = [f for f in films if film_filter.lower() in f["title"].lower()]
+    if not matches:
+        raise SystemExit(f"No now-playing film matching {film_filter!r} found at this cinema.")
+    if len(matches) > 1:
+        titles = ", ".join(repr(f["title"]) for f in matches)
+        raise SystemExit(f"{film_filter!r} matches multiple films ({titles}); be more specific.")
+    return matches[0]
 
 
 def sessions_for_film_on_date(scheduled_film_id, cinema_id, iso_date):
@@ -109,7 +113,7 @@ def main():
     parser.add_argument(
         "--film",
         default=DEFAULT_FILM,
-        help=f"Only check films whose title contains this text (default: {DEFAULT_FILM!r}; pass '' for all films)",
+        help=f"Movie title (or substring) to check (default: {DEFAULT_FILM!r})",
     )
     parser.add_argument("--delay", type=float, default=0.3, help="Seconds to sleep between API calls (default: 0.3)")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON instead of a table")
@@ -122,56 +126,54 @@ def main():
         return
 
     cinema_id = find_cinema_id(args.cinema)
-    films = now_playing_for_cinema(cinema_id, args.film)
+    film = find_film(cinema_id, args.film)
 
     today = date.today()
     results = []
     for offset in range(args.days):
         iso_date = (today + timedelta(days=offset)).isoformat()
-        for film in films:
+        try:
+            sessions = sessions_for_film_on_date(film["scheduledFilmId"], cinema_id, iso_date)
+        except urllib.error.URLError as exc:
+            print(f"warning: failed to fetch sessions for {film['title']} on {iso_date}: {exc}")
+            continue
+        time.sleep(args.delay)
+        for session in sessions:
+            if not is_luxury_session(session):
+                continue
             try:
-                sessions = sessions_for_film_on_date(film["scheduledFilmId"], cinema_id, iso_date)
+                availability = luxury_seat_availability(cinema_id, session["id"])
             except urllib.error.URLError as exc:
-                print(f"warning: failed to fetch sessions for {film['title']} on {iso_date}: {exc}")
+                print(f"warning: failed to fetch seat plan for session {session['id']}: {exc}")
                 continue
             time.sleep(args.delay)
-            for session in sessions:
-                if not is_luxury_session(session):
-                    continue
-                try:
-                    availability = luxury_seat_availability(cinema_id, session["id"])
-                except urllib.error.URLError as exc:
-                    print(f"warning: failed to fetch seat plan for session {session['id']}: {exc}")
-                    continue
-                time.sleep(args.delay)
-                if availability is None:
-                    continue
-                available, total = availability
-                if available > 0:
-                    results.append(
-                        {
-                            "date": iso_date,
-                            "showtime": session["showtime"],
-                            "film": film["title"],
-                            "sessionId": session["id"],
-                            "availableLuxurySeats": available,
-                            "totalLuxurySeats": total,
-                        }
-                    )
+            if availability is None:
+                continue
+            available, total = availability
+            if available > 0:
+                results.append(
+                    {
+                        "date": iso_date,
+                        "showtime": session["showtime"],
+                        "film": film["title"],
+                        "sessionId": session["id"],
+                        "availableLuxurySeats": available,
+                        "totalLuxurySeats": total,
+                    }
+                )
 
     if args.json:
         print(json.dumps(results, indent=2))
         return
 
     if not results:
-        scope = f" for {args.film!r}" if args.film else ""
-        print(f"No open luxury seats found{scope} in the next {args.days} day(s) at {args.cinema}.")
+        print(f"No open luxury seats for {film['title']!r} in the next {args.days} day(s) at {args.cinema}.")
         return
 
     results.sort(key=lambda r: r["showtime"])
-    print(f"Open luxury seats at {args.cinema} (next {args.days} day(s)):\n")
+    print(f"Open luxury seats for {film['title']!r} at {args.cinema} (next {args.days} day(s)):\n")
     for r in results:
-        print(f"  {r['showtime']}  {r['film']:<45}  {r['availableLuxurySeats']}/{r['totalLuxurySeats']} open")
+        print(f"  {r['showtime']}  {r['availableLuxurySeats']}/{r['totalLuxurySeats']} open")
 
 
 if __name__ == "__main__":
